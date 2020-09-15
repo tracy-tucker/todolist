@@ -19,6 +19,7 @@ class App extends React.Component {
     this.addItem = this.addItem.bind(this);
     this.handleInput = this.handlInput.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
+    this.setUpdate = this.setUpdate.bind(this);
   }
 
   addItem(e) {
@@ -52,6 +53,18 @@ class App extends React.Component {
         items: filteredItems
       })
   }
+
+  setUpdate(text, key) {
+    const items = this.state.items;
+    items.map(item => {
+      if (item.key === key) {
+        item.text = text;
+      }
+    })
+    this.setState({
+      items: items
+    })
+  }
   
   render() {
     return (
@@ -65,7 +78,8 @@ class App extends React.Component {
         </form>
       </header>
       <ListItems items = {this.state.items}
-      deleteItem = {this.deleteItem}></ListItems>
+      deleteItem = {this.deleteItem}
+      setUpdate = {this.setUpdate}></ListItems>
       </div>
     );
   }
